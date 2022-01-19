@@ -9,8 +9,9 @@ async function fetchFullBlock(id: string) {
     return await blockRepository.findOne(
         {
             where: { id },
-            relations: ["children"],
-            loadRelationIds: true,
+            loadRelationIds: {
+                relations: ["children", "parent"],
+            }
         }
     );
 }
@@ -46,12 +47,13 @@ export async function blockGetAction(request: Request, response: Response) {
     // WHERE "Block"."parentId" IS NULL
 
     // But the query that blockRepository generated is actually not as optimal
-    // probably not worth digging into it right now.
+    // maybe related to this bug: https://github.com/typeorm/typeorm/issues/5694
     const blocks = await blockRepository.find(
         {
             where: { parent: IsNull() },
-            relations: ["children"],
-            loadRelationIds: true
+            loadRelationIds: {
+                relations: ["children", "parent"],
+            }
         }
     );
     response.send(blocks);
