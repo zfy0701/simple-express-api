@@ -1,0 +1,20 @@
+{
+  "name": "simple-express-api",
+  "version": "0.0.1",
+  "devDependencies": {
+    "@types/body-parser": "^1.16.8",
+    "@types/express": "^4.11.1",
+    "@types/node": "^17.0.10",
+    "typescript": "^3.3.3333"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "pg": "^8.7.1",
+    "typeorm": "^0.2.41"
+  },
+  "scripts": {
+    "start": "tsc && node src/index.js",
+    "compile": "tsc"
+  }
+}
